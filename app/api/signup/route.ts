@@ -29,7 +29,10 @@ export async function POST(req: Request) {
             })
             await newUser.save()
         }
-
+        return Response.json({
+            success: true,
+            message: "User registered successfully"
+        })
 
     } catch (error) {
         console.error('Error Registering User', error)
