@@ -1,8 +1,8 @@
-'use client';
+'use client'
 import { useToast } from '@/hooks/use-toast';
 import { signUpSchema } from '@/schemas/signUpSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDebounceCallback } from 'usehooks-ts';
@@ -22,6 +22,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
+import Link from 'next/link';
 
 const page = () => {
 	const [username, setUsername] = useState('');
@@ -31,7 +32,7 @@ const page = () => {
 
 	const debounced = useDebounceCallback(setUsername, 3000);
 	const { toast } = useToast();
-	// const router = useRouter()
+	const router = useRouter()
 
 	//zod implementation
 	const form = useForm<z.infer<typeof signUpSchema>>({
@@ -75,7 +76,7 @@ const page = () => {
 				title: 'success',
 				description: response.data.message,
 			});
-			// router.replace(`/dashboard/${username}`)
+			router.replace(`/sign-in`)
 			setIsSubmitting(false);
 		} catch (error) {
 			console.error('Error in signup of user', error);
@@ -91,21 +92,20 @@ const page = () => {
 
 	return (
 		<div className="h-screen w-screen bg-gradient-to-br from-[#2A3848] to-[#0A0708] md:flex justify-center items-center">
-			<Section>
-					<div className=" bg-white md:p-8 p-4 w-full h-screen">
+					<div className="max-w-lg bg-white md:p-8 p-4 w-full h-screen">
 						<div className="flex flex-col px-5 sm:mb-10 mb-2">
 							<h1 className="text-black sm:text-4xl text-2xl font-bold">
 								Registration
 							</h1>
 							<div className="w-9 h-1 bg-gradient-to-r from-[#2A3848] to-[#0A0708] ml-1 rounded-full"></div>
 						</div>
-						<div className=" max-w-[43.75] ">
+						<div className="">
 							<Form {...form}>
 								<form
 									onSubmit={form.handleSubmit(onSubmit)}
-									className="md:px-20 px-5">
-									<div className="grid md:grid-cols-2 grid-cols-1 gap-4 mb-3">
-										<div className="md:w-[15.75rem] w-full">
+									className="md:px-15 px-5">
+									<div className="grid grid-cols-1 gap-4 mb-3">
+										<div className="">
 											<FormField
 												control={form.control}
 												name="username"
@@ -135,7 +135,7 @@ const page = () => {
 												)}
 											/>
 										</div>
-										<div className="md:w-[15.75rem] w-full">
+										<div className="">
 											<FormField
 												control={form.control}
 												name="password"
@@ -158,7 +158,7 @@ const page = () => {
 												)}
 											/>
 										</div>
-										<div className="md:w-[15.75rem] w-full">
+										<div className="">
 											<FormField
 												control={form.control}
 												name="firstname"
@@ -180,7 +180,7 @@ const page = () => {
 												)}
 											/>
 										</div>
-										<div className="md:w-[15.75rem] w-full">
+										<div className="">
 											<FormField
 												control={form.control}
 												name="lastname"
@@ -202,7 +202,7 @@ const page = () => {
 												)}
 											/>
 										</div>
-										<div className="md:w-[15.75rem] w-full">
+										<div className="">
 											<FormField
 												control={form.control}
 												name="city"
@@ -224,7 +224,7 @@ const page = () => {
 												)}
 											/>
 										</div>
-										<div className="md:w-[15.75rem] w-full">
+										<div className="">
 											<FormField
 												control={form.control}
 												name="country"
@@ -262,9 +262,14 @@ const page = () => {
 									</Button>
 								</form>
 							</Form>
+							<div className='text-center mt-4'>
+                            <p>
+                                Already a member{' '}
+                                <Link href='/sign-in' className='text-blue-600 hover:text-blue-800'>Sign in</Link>
+                            </p>
+                        </div>
 						</div>
 					</div>
-			</Section>
 		</div>
 	);
 };
