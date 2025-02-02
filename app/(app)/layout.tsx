@@ -1,3 +1,4 @@
+import NavBar from "@/components/NavBar";
 
 
 export default function RootLayout({children}:Readonly<{
@@ -6,6 +7,7 @@ export default function RootLayout({children}:Readonly<{
     return(
         <html>
             <body>
+                <NavBar/>
                 {children}
             </body>
         </html>

@@ -6,21 +6,21 @@ import axios from "axios";
 
 export async function POST(request: Request) {
     
-  // // Get the session
-  // const session = await getServerSession(authOptions);
+  // Get the session
+  const session = await getServerSession(authOptions);
 
-  // // Check if the user is authenticated
-  // if (!session || !session?.user) {
-  //   return Response.json(
-  //     {
-  //       success: false,
-  //       message: "Not Authenticated",
-  //     },
-  //     { status: 401 }
-  //   );
-  // }
+  // Check if the user is authenticated
+  if (!session || !session?.user) {
+    return Response.json(
+      {
+        success: false,
+        message: "Not Authenticated",
+      },
+      { status: 401 }
+    );
+  }
 
-   // Get the URL of the request
+  //  Get the URL of the request
    const { city, country } = await request.json();
 
     // Debugging log to check extracted values
