@@ -1,11 +1,10 @@
 "use client"
 import React from 'react'
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { ApiResponse } from '@/types/ApiResonse';
-import { toast } from '@/hooks/use-toast';
-import Dashboard from '@/components/Dashboard';
-import { string } from 'zod';
+import WeatherBar from '@/components/WeatherBar';
+import Search from '@/components/Search';
+
 
 interface User {
   _id?: string;
@@ -28,7 +27,7 @@ interface WeatherData {
 
 const page = () => {
 
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
 
@@ -48,8 +47,13 @@ const page = () => {
   
 
   return (
-    <div>
-      <Dashboard user={user ?? {}} isLoading={loading} error={error ?? ""} />
+    <div className='flex md:flex-row flex-col-reverse'>
+      <div className='lg:w-[25rem]'>
+        <WeatherBar user={user ?? {}} isLoading={loading} error={error ?? ""} />
+      </div>
+      <div className='lg:w-full lg:ml-5'>
+        <Search/>
+      </div>
     </div>
   );
 };

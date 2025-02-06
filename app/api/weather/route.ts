@@ -23,10 +23,6 @@ export async function POST(request: Request) {
   //  Get the URL of the request
    const { city, country } = await request.json();
 
-    // Debugging log to check extracted values
-    console.log('Extracted city:', city);
-    console.log('Extracted country:', country);
-
   
     if (!city || !country) {
         return Response.json(
@@ -53,8 +49,12 @@ export async function POST(request: Request) {
     //Extract relevant weather information
     
     const {
+      weather,
       main: {temp, feels_like, pressure, humidity},
       wind: {speed: windspeed},
+      clouds: {all},
+      rain,
+      snow,
       sys: {sunrise, sunset},
     } = weatherResponse.data
 
@@ -65,19 +65,34 @@ export async function POST(request: Request) {
     const sunriseTime = new Date(sunrise*1000).toLocaleTimeString();
     const sunsetTime = new Date(sunset*1000).toLocaleTimeString();
 
+    const {main, description, icon} = weather[0]
 
+    //Converting temperature from decimal to an intiger
+    const temperature = Math.round(temp);
+
+
+    
     return Response.json({
       success: true,
       data: {
-        temperature: temp,
+        main,
+        description,
+        icon,
+        temperature: temperature,
         feels_like,
         pressure,
         humidity,
         windspeed: `${windSpeedKmph}`,
+        all,
+        rain,
+        snow,
         sunrise: sunriseTime,
         sunset: sunsetTime,
+        lat,
+        lon,
       },
-      message: 'Successfully fetched weather data'
+      message: 'Successfully fetched weather data',
+      
     })
     
   } catch (error) {
