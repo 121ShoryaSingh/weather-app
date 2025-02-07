@@ -3,46 +3,25 @@ import React, { useEffect, useState }   from 'react'
 import axios, { AxiosError } from 'axios';
 import { toast } from '@/hooks/use-toast';
 import { ApiResponse } from '@/types/ApiResonse';
-import Search from './Search';
 import RainForecast from './ChancesOfRain';
-import { Cloud, Droplet, Droplets, Sunrise, Sunset, Wind } from 'lucide-react';
 import HoursUntil from './HoursUntil';
+import { Sunrise, Sunset } from 'lucide-react';
+import { WeatherData, User } from '@/types/types';
+
  
 
 interface props {
-	user: {
-		_id?: string;
-		username?: string;
-		firstname?: string;
-		lastname?: string;
-		city?: string;
-		country?: string;
-	};
+  user: User
   isLoading: boolean;
   error: string;
+  setWeatherData: (data: WeatherData | null) => void;
 }
 
-interface WeatherData {
-    main: string;
-    description: string;
-    icon: string;
-    temperature: string;
-    feels_like: string;
-    pressure: string;
-    humidity: string;
-    windspeed: string;
-    rain?: string;
-    all?: string;
-    snow?: string;
-    sunrise: string;
-    sunset: string;
-    lat: number;
-    lon: number;
-  }
-const WeatherBar = ({user, isLoading, error}: props) => {
+
+const WeatherBar = ({user, isLoading, error, setWeatherData}: props) => {
 	const [weather, setWeather] = useState<WeatherData | null>(null);
 	const [time, setTime] = useState<string>('');
-
+	
 	useEffect(() => {
 		const fetchWeather = async () => {
 			try {
@@ -53,42 +32,11 @@ const WeatherBar = ({user, isLoading, error}: props) => {
 				);
 
 				// Store extracted data in state
-				const {
-					main,
-					description,
-					icon,
-					temperature,
-					feels_like,
-					pressure,
-					humidity,
-					windspeed,
-					rain,
-					all,
-					snow,
-					sunrise,
-					sunset,
-					lat,
-					lon,
-				} = response.data.data;
+				const newWeather: WeatherData = response.data.data;
 
 				// ✅ Set weather state with extracted data
-				setWeather({
-					main,
-					description,
-					icon,
-					temperature,
-					feels_like,
-					pressure,
-					humidity,
-					windspeed,
-					rain,
-					all,
-					snow,
-					sunrise,
-					sunset,
-					lat,
-					lon,
-				});
+				setWeather(newWeather);
+				setWeatherData(newWeather);
 			} catch (error) {
 				console.error('Error in fetching Weather Data', error);
 				const axiosError = error as AxiosError<ApiResponse>;
@@ -117,7 +65,7 @@ const WeatherBar = ({user, isLoading, error}: props) => {
 			);
 		};
 
-		updateTime(); // Initialize immediately
+		updateTime(); 
 		const interval = setInterval(updateTime, 60000); // Update every second
 
 		return () => clearInterval(interval); // Cleanup on unmount
