@@ -6,6 +6,7 @@ import WeatherBar from '@/components/WeatherBar';
 import Search from '@/components/Search';
 import TodayOverview from '@/components/TodayOverview';
 import { WeatherData, User } from '@/types/types';
+import WeatherChart from '@/components/WeatherChart';
 
 
 
@@ -48,11 +49,14 @@ const page = () => {
 					setWeatherData={handleDataFromChild}
 				/>
 			</div>
-			<div className="lg:w-full lg:ml-5 mb-5">
+			<div className="lg:w-full lg:ml-5 mb-5 lg:px-0 sm:px-6">
 				<Search />
 				<div>
 					<TodayOverview weather={weatherData} />
 				</div>
+        <div className='lg:px-0 px-5 max-w-2xl min-w-[23.4375rem] mt-5'>
+          <WeatherChart lat={weatherData?.lat} lon={weatherData?.lon} />
+        </div>
 			</div>
 		</div>
 	);

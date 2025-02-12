@@ -144,7 +144,7 @@ const WeatherBar = ({user, isLoading, error, setWeatherData}: props) => {
 							</div>
 						</div>
 						<div className="lg:hidden flex">
-							<div className="max-w-screen-sm w-full px-5 mx-auto">
+							<div className="max-w-screen-sm w-full min-w-[23.4375rem] px-5 mx-auto">
 								<div className="grid grid-cols-1 grid-flow-col">
 									<div className="bg-gradient-to-br from-[#2A3848] to-[#0A0708] rounded-lg">
 										<div className="flex flex-col text-center text-[#99A1A8] gap-3">

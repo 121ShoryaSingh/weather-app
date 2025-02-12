@@ -1,4 +1,13 @@
 
+export interface ChartDataPoint  {
+        date: string;
+        temperature: number;
+      };
+
+export interface WeatherChartProps {
+	lat?: number;
+	lon?: number;
+}
 
 export interface WeatherData {
         main?: string;

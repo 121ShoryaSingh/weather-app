@@ -28,7 +28,7 @@ const NavBar = () => {
 
   return (
 		<nav className="max-w-screen-xl min-w-[23.4375rem] w-full mx-auto py-2">
-			<div className="max-w-screen-xl mx-auto">
+			<div className=" mx-auto">
 				<div className="w-full flex justify-between px-10">
 					<div className="">
 						<Link href="/dashboard">
