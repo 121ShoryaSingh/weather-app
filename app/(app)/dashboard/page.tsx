@@ -21,7 +21,6 @@ const page = () => {
   const handleDataFromChild = (Data: WeatherData | null ) => {
     setWeatherData(Data);
   };
-    console.log(weatherData)
 
 
   useEffect(() => {

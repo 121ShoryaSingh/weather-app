@@ -43,7 +43,6 @@ export default function WeatherChart({ lat, lon }: WeatherChartProps) {
 
         if (Array.isArray(response.data)) {
           setChartData(response.data);
-          console.log(response.data)
         } else {
           console.error("Unexpected API response:", response.data);
           setChartData([]);
