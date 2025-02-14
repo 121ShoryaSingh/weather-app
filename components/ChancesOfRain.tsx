@@ -3,7 +3,7 @@ import { BarChart } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Bar } from 'recharts';
 
-const RainForecast = ({ lat, lon }: { lat?: number; lon?: number }) => {
+const RainForecast = ({ lat, lon }: {lat:any, lon:any }) => {
   const [rainData, setRainData] = useState<{ time: string; rain: number }[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

@@ -22,8 +22,8 @@ export interface ChartDataPoint  {
       };
 
 export interface WeatherChartProps {
-	lat?: number;
-	lon?: number;
+	lat?: number | null;
+	lon?: number | null;
 }
 
 export interface WeatherData {

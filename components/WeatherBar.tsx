@@ -34,7 +34,6 @@ const WeatherBar = ({user, isLoading, error, setWeatherData}: props) => {
 				// Store extracted data in state
 				const newWeather: WeatherData = response.data.data;
 
-				// ✅ Set weather state with extracted data
 				setWeather(newWeather);
 				setWeatherData(newWeather);
 			} catch (error) {
@@ -143,64 +142,7 @@ const WeatherBar = ({user, isLoading, error, setWeatherData}: props) => {
 								</div>
 							</div>
 						</div>
-						<div className="lg:hidden flex">
-							<div className="max-w-screen-sm w-full min-w-[23.4375rem] px-5 mx-auto">
-								<div className="grid grid-cols-1 grid-flow-col">
-									<div className="bg-gradient-to-br from-[#2A3848] to-[#0A0708] rounded-lg">
-										<div className="flex flex-col text-center text-[#99A1A8] gap-3">
-											<img
-												src={`https://openweathermap.org/img/wn/${weather?.icon}@2x.png`}
-												alt="Icon"
-												className="object-cover mx-auto md:h-28 md:w-28 w-16 h-16"
-											/>
-											<span className="text-lg font-bold">
-												{weather?.temperature}°C
-											</span>
-											<span className="capitalize text-lg font-bold">
-												{weather?.description}
-											</span>
-										</div>
-										<div className="pt-10">
-											<RainForecast
-												lat={weather?.lat}
-												lon={weather?.lon}
-											/>
-										</div>
-										<div>
-											<div className="pt-9 px-5 w-full">
-												<h2 className="text-[#99A1A8] text-2xl font-semibold">
-													SUNRISE AND SUNSET
-												</h2>
-												<div className="flex justify-evenly text-[#99A1A8] opacity-60 pt-6 text-lg">
-													<Sunrise size={30} />
-													<div className="flex flex-col">
-														<span className="">SUNRISE</span>
-														<span className="text-right">
-															{weather?.sunrise}
-														</span>
-													</div>
-													<div>
-														<HoursUntil targetTime={weather?.sunrise} />
-													</div>
-												</div>
-												<div className="flex justify-evenly text-[#99A1A8] opacity-60 py-6 text-lg">
-													<Sunset size={30} />
-													<div className="flex flex-col">
-														<span className="">SUNSET</span>
-														<span className="text-right">
-															{weather?.sunset}
-														</span>
-													</div>
-													<div>
-														<HoursUntil targetTime={weather?.sunset} />
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 				)}
 			</div>

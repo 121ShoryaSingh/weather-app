@@ -14,7 +14,7 @@ const TodayOverview = ({weather}: Props) => {
   return (
 		<div className="mt-5 lg:max-w-screen-sm max-w-screen-sm min-w-[23.4375rem]">
 			<h1 className="pl-5 text-xl font-bold text-[#8793A0]">TODAY OVERVIEW</h1>
-			<div className="grid md:grid-cols-2 grid-cols-1 justify-items-center mt-5 gap-3 px-5">
+			<div className="grid xl:grid-cols-2 grid-cols-1 justify-items-center mt-5 gap-3 px-5">
 				<div className="bg-gradient-to-br from-[#2A3848] to-[#0A0708] md:w-[14.25rem] w-full rounded-xl">
 					<div className="w-full py-4 text-[#99A1A8] flex items-center gap-5 pl-16 md:pl-10">
 						<Wind />
