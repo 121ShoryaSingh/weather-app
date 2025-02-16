@@ -1,3 +1,10 @@
+import { ObjectId, Schema } from "mongoose";
+
+export interface savedlocation {
+    savedby: ObjectId
+    latitude: number;
+    longitude: number;
+}
 
 export interface CityFromAPI { 
         name: string;

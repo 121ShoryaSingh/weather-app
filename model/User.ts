@@ -1,68 +1,81 @@
 import mongoose, { Document, Schema } from "mongoose"; 
 
+// Interface for SavedLocation
 export interface SavedLocation extends Document {
-    savedby: Schema.Types.ObjectId;
-    longitude: string;
-    latitude: string;
+    savedby: mongoose.Types.ObjectId;
+    longitude: number;
+    latitude: number;
 }
 
-const SavedLocationSchema: Schema<SavedLocation> = new Schema ({
+// Define SavedLocation Schema
+const SavedLocationSchema: Schema<SavedLocation> = new Schema({
     savedby: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", 
+        required: true,
     },
     longitude: {
-        type: String,
-        required: true
+        type: Number,
+        required: true,
     },
     latitude: {
-        type: String,
+        type: Number,
         required: true,
-    }
+    },
+});
 
-})
+// Create & Export SavedLocation Model
+const SavedLocationModel = mongoose.models.SavedLocation || mongoose.model<SavedLocation>("SavedLocation", SavedLocationSchema);
+export { SavedLocationModel };
 
+// Interface for User
 export interface User extends Document {
     username: string;
     password: string;
     firstname: string;
     lastname: string;
-    city: string
-    country: string
-    savedlocation: SavedLocation[]
+    city: string;
+    country: string;
+    savedlocation: mongoose.Types.ObjectId[]; // Store SavedLocation IDs
 }
 
+// Define User Schema
 const UserSchema: Schema<User> = new Schema({
     username: {
         type: String,
-        required: [true, "Username is requied"],
+        required: [true, "Username is required"],
         trim: true,
         unique: true,
     },
     password: {
         type: String,
-        required: [true, "Email is required"],
+        required: [true, "Password is required"],
     },
     firstname: {
         type: String,
-        required: [true, "Required"]
+        required: [true, "First name is required"],
     },
     lastname: {
         type: String,
-        required: [true, "Required"]
+        required: [true, "Last name is required"],
     },
     city: {
         type: String,
-        required: [true, "Required"]
+        required: [true, "City is required"],
     },
     country: {
         type: String,
-        required: [true, "Required"]
+        required: [true, "Country is required"],
     },
-    savedlocation: [SavedLocationSchema]
-})
+    savedlocation: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "SavedLocation", 
+        },
+    ],
+});
 
-const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>("User", UserSchema)
-export default UserModel
+// Create & Export User Model
+const UserModel = mongoose.models.User || mongoose.model<User>("User", UserSchema);
+export default UserModel;
 

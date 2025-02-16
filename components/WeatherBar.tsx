@@ -31,7 +31,7 @@ const WeatherBar = ({user, isLoading, error, setWeatherData}: props) => {
 					{ headers: { 'Content-Type': 'application/json' } }
 				);
 
-				// Store extracted data in state
+				// Store extracted data in statez
 				const newWeather: WeatherData = response.data.data;
 
 				setWeather(newWeather);

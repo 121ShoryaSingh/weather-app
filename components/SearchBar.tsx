@@ -25,11 +25,10 @@ export default function SearchBar() {
 			setLoading(true);
 			try {
 				const response = await axios.get<City[]>('/api/search-cities', {
-					// Type the Axios response
 					params: { query: searchTerm },
 				});
 
-				setSuggestions(response.data); // No need for mapping if the data is already in the correct format
+				setSuggestions(response.data); 
 				console.log(suggestions);
 			} catch (error) {
 				console.error('Error fetching city data:', error);

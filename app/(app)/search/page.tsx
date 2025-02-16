@@ -2,6 +2,7 @@
 
 import RainForecast from "@/components/ChancesOfRain";
 import HoursUntil from "@/components/HoursUntil";
+import SaveButton from "@/components/SaveButton";
 import SearchBar from "@/components/SearchBar";
 import TodayOverview from "@/components/TodayOverview";
 import WeatherChart from "@/components/WeatherChart";
@@ -71,15 +72,20 @@ export default function Page() {
 			<div className="">
 				<div className="max-w-screen-xl min-w-[23.4375rem] bg-gradient-to-br from-[#2A3848] to-[#0A0708] rounded-lg py-2 mx-auto">
 					{/* Search Bar & Date */}
-					<div className="w-full max-w-screen-xl mx-auto flex justify-between px-10">
+					<div className="w-full max-w-screen-xl mx-auto flex justify-between lg:px-10 px-5">
 						<SearchBar />
-						<div className="hidden md:flex flex-col text-[#9199A1] max-w-[9rem]">
-							<span className="text-lg font-bold">
-								{dateInfo.month} {dateInfo.year}
-							</span>
-							<span className="text-lg font-bold">
-								{dateInfo.day}, {dateInfo.date}, {dateInfo.year}
-							</span>
+						<div className="flex justify-center gap-5">
+							<div className="flex justify-center">
+								<SaveButton latitude={latitude} longitude={longitude} />
+							</div>
+							<div className="hidden md:flex flex-col text-[#9199A1] max-w-[12rem]">
+								<span className="text-lg font-bold">
+									{dateInfo.month} {dateInfo.year}
+								</span>
+								<span className="text-lg font-bold">
+									{dateInfo.day}, {dateInfo.date}, {dateInfo.year}
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -156,7 +162,7 @@ export default function Page() {
 								</div>
 							</div>
 							<div className="space-y-10 max-w-screen-sm mx-auto">
-								<div className="lg:flex hidden text-[#99A1A8] opacity-60 text-2xl font-bold pt-10">
+								<div className="lg:flex hidden justify-center text-[#99A1A8] opacity-60 text-2xl font-bold pt-10">
 									{city}
 								</div>
 								<TodayOverview weather={weatherData} />
