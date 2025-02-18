@@ -1,7 +1,12 @@
 import { ObjectId, Schema } from "mongoose";
 
+export interface savebuttonprops { 
+    latitude: number | null; 
+    longitude: number| null;
+}
+
 export interface savedlocation {
-    savedby: ObjectId
+    savedby: any
     latitude: number;
     longitude: number;
 }
