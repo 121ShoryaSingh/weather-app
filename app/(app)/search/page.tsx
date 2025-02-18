@@ -118,7 +118,7 @@ export default function Page() {
 											{weatherData?.description}
 										</span>
 									</div>
-									<div className="lg:hidden flex text-[#99A1A8] opacity-60 text-2xl font-bold pt-5">
+									<div className="lg:hidden flex text-[#99A1A8] justify-center opacity-60 text-2xl font-bold pt-5">
 										{city}
 									</div>
 									{/* Rain Forecast */}

@@ -13,7 +13,7 @@ import { Menu, X } from 'lucide-react'
 
 const info = [
     {key:1, title:'DASHBOARD' , link:'/dashboard' , icon:'/home.svg'},
-    {key:2, title:'SAVED LOCATION', link:'/savedloaction', icon:'/location.svg'},
+    {key:2, title:'SAVED LOCATION', link:'/savedlocation', icon:'/location.svg'},
 ]
 
 const NavBar = () => {

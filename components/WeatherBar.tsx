@@ -65,9 +65,9 @@ const WeatherBar = ({user, isLoading, error, setWeatherData}: props) => {
 		};
 
 		updateTime(); 
-		const interval = setInterval(updateTime, 60000); // Update every second
+		const interval = setInterval(updateTime, 60000); 
 
-		return () => clearInterval(interval); // Cleanup on unmount
+		return () => clearInterval(interval); 
 	}, []);
 
 	return (

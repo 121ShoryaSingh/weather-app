@@ -4,7 +4,7 @@ import { authOptions } from '../auth/[...nextauth]/options';
 import { NextRequest, NextResponse } from 'next/server';
 import UserModel, { SavedLocationModel } from '@/model/User';
 
-export async function POST(req: NextRequest) {
+export async function DELETE(req: NextRequest) {
     await dbConnect();
 
     try {
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ success: false, message: 'Not Authenticated' }, { status: 401 });
         }
 
-        const user = await UserModel.findOne({username: session.user.username}).select("savedlocation");
+        const user = await UserModel.findOne({username: session.user.username}).select("_id savedlocation");
         if (!user) {
             return NextResponse.json({ success: false, message: 'User not found' }, { status: 404 });
         }
@@ -23,41 +23,33 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ success: false, message: 'Missing latitude and longitude' }, { status: 400 });
         }
 
-        // Ensure savedlocation exists
-        user.savedlocation = user.savedlocation || [];
-
-        // Check if the location already exists
-        const existingLocation = await SavedLocationModel.findOne({
+        // Find and remove the location
+        const locationToDelete = await SavedLocationModel.findOneAndDelete({
             savedby: user._id,
             latitude,
             longitude,
         });
 
-        if (existingLocation) {
+        if (!locationToDelete) {
             return NextResponse.json(
-                { success: false, message: 'Location already saved' },
-                { status: 409 }
+                { success: false, message: 'Location not found' },
+                { status: 404 }
             );
         }
 
-        // ➕ Save new location
-        const newLocation = await SavedLocationModel.create({
-            savedby: user._id,
-            latitude,
-            longitude,
-        });
-
-        // Push new location `_id` reference
-        user.savedlocation.push(newLocation._id);
+        // Remove reference from user's saved locations
+        user.savedlocation = user.savedlocation.filter(
+            (locId: any) => locId.toString() !== locationToDelete._id.toString()
+        );
         await user.save();
 
         return NextResponse.json(
-            { success: true, message: 'Location saved' },
-            { status: 201 }
+            { success: true, message: 'Location removed' },
+            { status: 200 }
         );
 
     } catch (error) {
-        console.error('Error saving location:', error);
+        console.error('Error removing location:', error);
         return NextResponse.json({ success: false, message: 'Database error' }, { status: 500 });
     }
 }

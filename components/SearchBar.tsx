@@ -84,7 +84,7 @@ export default function SearchBar() {
 						</div>
 					</div>
 				) : !loading && searchTerm.length >= 3 ? (
-					<p>No results found.</p>
+					<p className='text-white ml-8'>No results found.</p>
 				) : null}
 
 				{loading && <p className="text-sm text-gray-500 mt-2">Loading...</p>}
