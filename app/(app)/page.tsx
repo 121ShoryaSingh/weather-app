@@ -13,7 +13,7 @@ export default function Home() {
     
     {/* Call to Action */}
     <div className="mt-6">
-        <Link href="/login" className="bg-black hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md">
+        <Link href="/sign-in" className="bg-black hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md">
             Login to Get Started
         </Link>
     </div>
