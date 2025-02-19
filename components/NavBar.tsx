@@ -40,7 +40,7 @@ const NavBar = () => {
           {/* Auth Buttons */}
           {session ? (
             <div className="flex items-center gap-3">
-              <span className="font-bold">Welcome, {user?.name || 'Guest'}</span>
+              <span className="font-bold">Welcome, {user?.username}</span>
               <Button onClick={() => signOut()} className="bg-gradient-to-br from-gray-800 to-black">
                 Logout
               </Button>

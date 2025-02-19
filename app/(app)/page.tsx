@@ -25,12 +25,12 @@ export default function Home() {
             <p className="text-gray-300">Save and monitor weather conditions in your favorite locations.</p>
         </div>
         <div className="p-6 bg-white bg-opacity-10 rounded-lg">
-            <h2 className="text-xl font-semibold">📊 Hourly Forecasts</h2>
-            <p className="text-gray-300">Plan your day better with precise weather insights.</p>
-        </div>
-        <div className="p-6 bg-white bg-opacity-10 rounded-lg">
             <h2 className="text-xl font-semibold">⚡ Real-time Updates</h2>
             <p className="text-gray-300">Get the latest weather conditions instantly.</p>
+        </div>
+        <div className="p-6 bg-white bg-opacity-10 rounded-lg">
+          <h2 className="text-xl font-semibold">🌧️ 4-Hour Rain Forecast</h2>
+          <p className="text-gray-300">Stay ahead of the rain with a detailed precipitation forecast.</p>
         </div>
     </div>
 </div>
